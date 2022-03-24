@@ -139,7 +139,8 @@ function initVars(){
 			["fap", "clop"],
 			["man", "stallion"],
 			["men", "stallions"],
-			["hey", "hay"]
+			["hey", "hay"],
+			["indiana jones", "Daring Do"]
 		];
 		localStorage["replaceList"] = JSON.stringify(replace);
 	} else{
