@@ -124,16 +124,16 @@ window.onload = function(){
 	}
 
 	document.getElementById("gen").onclick = function(){
-		chrome.tabs.create({url:chrome.extension.getURL("options.htm#0")});
+		chrome.tabs.create({url:chrome.runtime.getURL("options.htm#0")});
 	}
 	document.getElementById("rep").onclick = function(){
-		chrome.tabs.create({url:chrome.extension.getURL("options.htm#1")});
+		chrome.tabs.create({url:chrome.runtime.getURL("options.htm#1")});
 	}
 	document.getElementById("web").onclick = function(){
-		chrome.tabs.create({url:chrome.extension.getURL("options.htm#2")});
+		chrome.tabs.create({url:chrome.runtime.getURL("options.htm#2")});
 	}
 	document.getElementById("abt").onclick = function(){
-		chrome.tabs.create({url:chrome.extension.getURL("options.htm#3")});
+		chrome.tabs.create({url:chrome.runtime.getURL("options.htm#3")});
 	}
 }
 

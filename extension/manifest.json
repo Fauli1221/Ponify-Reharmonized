@@ -1,8 +1,8 @@
 {
 	"browser_specific_settings": {
 		"gecko": {
-		  "id": "ponifyReharmonized@ChristianSilvermoon.github.io",
-		  "strict_min_version": "42.0"
+		  "id": "the@birb.horse",
+		  "strict_min_version": "115.0"
 		}
 	},
     "content_scripts": [
@@ -31,7 +31,7 @@
         "16": "img/rh16.png",
         "48": "img/rh48.png"
     },
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Ponify Reharmonized",
     "background": {
         "scripts": [
@@ -44,6 +44,9 @@
     "description": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton.",
     "permissions": [
         "tabs",
+        "activeTab"
+    ],
+    "host_permissions": [
         "http://*/*",
         "https://*/*"
     ]
