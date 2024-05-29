@@ -27,11 +27,11 @@
  */
 
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
-	if(request.method == "update"){
+	if(request.method === "update"){
 		//May cause issues with multiple windows?
 		chrome.tabs.query( { active: true }, tabs => tabs.forEach( tab => updateIcon(tab) ) );
 		sendResponse({})
-	} else if ( request.method == "getStorage" ){
+	} else if ( request.method === "getStorage" ){
 		sendResponse({
 			url: sender.tab.url,
 			replace: JSON.parse(localStorage["replaceList"]),
@@ -46,11 +46,11 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 
 
 function updateIcon(tab){
-	var websites = JSON.parse(localStorage["websiteList"]);
-	var wlist_type = JSON.parse(localStorage["wlist_type"]);
-	var ponify_enabled = JSON.parse(localStorage["ponify_enabled"]);
+	const websites = JSON.parse(localStorage["websiteList"]);
+	const wlist_type = JSON.parse(localStorage["wlist_type"]);
+	const ponify_enabled = JSON.parse(localStorage["ponify_enabled"]);
 
-	var ponify = 0;
+	let ponify = 0;
 
 	if(ponify_enabled){
 		ponify = 1;
@@ -59,19 +59,19 @@ function updateIcon(tab){
 			ponify = 0;
 		}
 
-		var r = /([^\/]+:\/\/)?(www\.)?(([^\/]*)[^\?#]*)/;
-		var a = r.exec(tab.url);
+		const r = /([^\/]+:\/\/)?(www\.)?(([^\/]*)[^?#]*)/;
+		const a = r.exec(tab.url);
 
-		for(var i = 0; i < websites.length; i++){
+		for(let i = 0; i < websites.length; i++){
 
-			var b = r.exec(websites[i][0])[3];
+			const b = r.exec(websites[i][0])[3];
 
-			if((a[3].substr(0, b.length) == b) != wlist_type){
+			if((a[3].substr(0, b.length) === b) !== wlist_type){
 				ponify = 0;
 			}
 		}
 
-		if(a[1] != "http://" && a[1] != "https://"){
+		if(a[1] !== "http://" && a[1] !== "https://"){
 			ponify = 0;
 		}
 	}

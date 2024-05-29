@@ -22,14 +22,14 @@
 */
 
 
-var pdata;
-var pages;
+let pdata;
+let pages;
 
 function setEnabled(conf, enable, button, array){
 	var conf = document.getElementById(conf);
 	var enable = document.getElementById(enable);
 	
-	if(array.length == 0){
+	if(array.length === 0){
 		conf.style.display = "none";
 		document.getElementById(button).onclick = function(){
 			enable.style.display = "none";
@@ -46,22 +46,24 @@ function flipSwitch(a, b, d){
 }
 
 function toggleCheckbox(checkbox, obj){
+	let cl;
+	let checked;
 	if(obj){
-		var checked = obj.checked = 1 - obj.checked;
-		var cl = checked ? "clicked" : "";
+		checked = obj.checked = 1 - obj.checked;
+		cl = checked ? "clicked" : "";
 		pdata.check_count += checked ? 1 : -1;
 		
 		checkbox.setAttribute("class", cl);
-		if(pdata.check_count + pdata.checked == pdata.length){
+		if(pdata.check_count + pdata.checked === pdata.length){
 			pdata.check.setAttribute("class", cl);
 			pdata.checked = checked;
 		}
 	} else{
-		var checked = pdata.checked = 1 - pdata.checked;
-		var cl = checked ? "clicked" : "";
+		checked = pdata.checked = 1 - pdata.checked;
+		cl = checked ? "clicked" : "";
 		pdata.check.setAttribute("class", cl);
 		
-		for(var i = 0; i < pdata.length; i++){
+		for(let i = 0; i < pdata.length; i++){
 			pdata[i].check.setAttribute("class", cl);
 			pdata[i].checked = checked;
 		}
@@ -70,9 +72,9 @@ function toggleCheckbox(checkbox, obj){
 }
 
 function createCheckboxTd(obj){
-	var td = document.createElement("td");
+	const td = document.createElement("td");
 
-	var check = document.createElement("div");
+	const check = document.createElement("div");
 
 	if(obj){
 		obj.checked = 0;
@@ -89,12 +91,12 @@ function createCheckboxTd(obj){
 }
 
 function sortTable(c, d){
-	var order = pdata.sort_list[c];
-	
-	order.d += order.d == 1 ? -1 : 1;
-	order.style.backgroundImage = order.d == 0 ? "url('img/asc.png')" : "url('img/desc.png')";
-	for(var t = 0; t < pdata.sort_list.length; t++){
-		if(pdata.sort_list[t] != order){
+	const order = pdata.sort_list[c];
+
+	order.d += order.d === 1 ? -1 : 1;
+	order.style.backgroundImage = order.d === 0 ? "url('img/asc.png')" : "url('img/desc.png')";
+	for(let t = 0; t < pdata.sort_list.length; t++){
+		if(pdata.sort_list[t] !== order){
 			pdata.sort_list[t].style.backgroundImage = "url('img/none.png')";
 			pdata.sort_list[t].d = -1;
 		}
@@ -103,30 +105,31 @@ function sortTable(c, d){
 		return a.data[c] > b.data[c] ? 1 : -1;
 	});
 	if(!d){ pdata.reverse(); }
-	for(var i = 0; i < pdata.length; i++){
+	for(let i = 0; i < pdata.length; i++){
 		pdata.table.removeChild(pdata[i].tr);
 		pdata.table.appendChild(pdata[i].tr);
 	}
 }
 
 function populateTable(table, array, table_data){
+	let i;
 	pdata.check_count = 0;
 	pdata.column_count = table_data.length;
 	pdata.table = table;
 	pdata.data = array;
-	pdata.sort_list = new Array();
+	pdata.sort_list = [];
 
-	var tr = document.createElement("tr");
+	const tr = document.createElement("tr");
 	pdata.table_header = tr;
 	tr.appendChild(createCheckboxTd(null));
-	for(var i = 0; i < pdata.column_count; i++){
-		var td = document.createElement("td");
+	for(i = 0; i < pdata.column_count; i++){
+		const td = document.createElement("td");
 
-		var container = document.createElement("div");
-		
+		const container = document.createElement("div");
+
 		container.appendChild(document.createTextNode(table_data[i]));
-		
-		var order = document.createElement("div");
+
+		const order = document.createElement("div");
 		order.setAttribute("class", "order");
 		order.ident = i;
 		order.d = -1;
@@ -140,29 +143,29 @@ function populateTable(table, array, table_data){
 	}
 	table.appendChild(tr);
 	
-	for(var i = 0; i < array.length; i++){
+	for(i = 0; i < array.length; i++){
 		table.appendChild(createRow(array[i]));
 	}
 	sortTable(0, 1);
 }
 
 function createRow(array){
-	var obj = new Object();
-	
+	const obj = {};
+
 	obj.data = array;
 	obj.tr = document.createElement("tr");
 	obj.tr.appendChild(createCheckboxTd(obj));
 	
-	for(var i = 0; i < array.length; i++){
-		var td = document.createElement("td");
+	for(let i = 0; i < array.length; i++){
+		const td = document.createElement("td");
 
-		var input = document.createElement("input");
+		const input = document.createElement("input");
 		input.setAttribute("type", "text");
 		input.value = array[i];
 		input.ident = i;
 		input.onfocus = function(){ this.parentNode.setAttribute("class", "selected"); };
 		input.onblur = function(){
-			var v;
+			let v;
 			if(pdata.validate){
 				v = pdata.validate(this.value);
 			} else{
@@ -183,14 +186,15 @@ function createRow(array){
 }
 
 function deleteChecked(){
-	for(var i = pdata.length - 1; i >= 0 ; i--){
+	let i;
+	for(i = pdata.length - 1; i >= 0 ; i--){
 		if(pdata[i].checked){
 			pdata.table.removeChild(pdata[i].tr);
 			pdata.splice(i, 1);
 		}
 	}
 	pdata.data.splice(0, pdata.data.length);
-	for(var i = 0; i < pdata.length; i++){
+	for(i = 0; i < pdata.length; i++){
 		pdata.data.push(pdata[i].data);
 	}
 	pdata.check.setAttribute("class", "");
@@ -200,40 +204,40 @@ function deleteChecked(){
 
 
 function addRow(){
-	var array = new Array();
-	for(var i = 0; i < pdata.column_count; i++){
+	const array = [];
+	for(let i = 0; i < pdata.column_count; i++){
 		array.push("");
 	}
-	var row = createRow(array);
+	const row = createRow(array);
 	pdata.data.unshift(array);
 	pdata.table.insertBefore(row, pdata.table_header.nextSibling);
 	row.childNodes[1].childNodes[0].focus();
 }
 
 function createPGeneral(){
-	var page = document.getElementById("p0");
+	const page = document.getElementById("p0");
 	page.data = null;
 
-	flipSwitch("high00", "high01", highlight[0] == 1 || highlight[0] == 3 ? 1 : 0);	
+	flipSwitch("high00", "high01", highlight[0] === 1 || highlight[0] === 3 ? 1 : 0);
 
 	document.getElementById("high00").onclick = function(){ 
 		flipSwitch("high00", "high01", 1);
-		highlight[0] = highlight[0] == 2 ? 1 : 3;
+		highlight[0] = highlight[0] === 2 ? 1 : 3;
 	};
 	document.getElementById("high01").onclick = function(){
 		flipSwitch("high00", "high01", 0);
-		highlight[0] = highlight[0] == 1 ? 2 : 0;
+		highlight[0] = highlight[0] === 1 ? 2 : 0;
 	};
 	
-	flipSwitch("high10", "high11", highlight[0] == 1 || highlight[0] == 2 ? 1 : 0);	
+	flipSwitch("high10", "high11", highlight[0] === 1 || highlight[0] === 2 ? 1 : 0);
 
 	document.getElementById("high10").onclick = function(){ 
 		flipSwitch("high10", "high11", 1);
-		highlight[0] = highlight[0] == 3 ? 1 : 2;
+		highlight[0] = highlight[0] === 3 ? 1 : 2;
 	};
 	document.getElementById("high11").onclick = function(){
 		flipSwitch("high10", "high11", 0);
-		highlight[0] = highlight[0] == 1 ? 3 : 0;
+		highlight[0] = highlight[0] === 1 ? 3 : 0;
 	};
 	
 	flipSwitch("thr0", "thr1", pseudo_threading);	
@@ -247,12 +251,12 @@ function createPGeneral(){
 		pseudo_threading = 0;
 	};
 
-	var colour_picker = document.getElementById("colour_picker_input");
+	const colour_picker = document.getElementById("colour_picker_input");
 	colour_picker.parentNode.style.backgroundColor = highlight[1];
 	colour_picker.value = highlight[1];
 	
 	colour_picker.onkeyup = colour_picker.onchange = function(){
-		var reg = /#([0-9]|[A-F]){3}|(0-9][A-F]){6}/
+		const reg = /#([0-9]|[A-F]){3}|(0-9][A-F]){6}/;
 		if(reg.test(this.value)){
 			this.parentNode.style.backgroundColor = this.value;
 			highlight[1] = this.value;
@@ -286,15 +290,15 @@ function createPGeneral(){
 
 
 function createPRep(){
-	var page = document.getElementById("p1");
-	page.data = pdata = new Array();
+	const page = document.getElementById("p1");
+	page.data = pdata = [];
 
 	// Make user input lower case
 	pdata.validate = function(str){
 		return str.toLowerCase();
 	}
-	
-	var table = document.getElementById("rl");
+
+	const table = document.getElementById("rl");
 	populateTable(table, replace, ["Find", "Replace"]);
 	
 	document.getElementById("delr").onclick = function(){ deleteChecked(); };
@@ -306,16 +310,16 @@ function createPRep(){
 }
 
 function createPWeb(){
-	var page = document.getElementById("p2");
-	page.data = pdata = new Array();
+	const page = document.getElementById("p2");
+	page.data = pdata = [];
 
 	// Change the domain to lower case; preserve it for the rest of the url
 	pdata.validate = function(str){
-		var s = str.match(/(([^\/]+:\/\/)?(www\.)?([^\/]*))(.*)/i);
+		const s = str.match(/(([^\/]+:\/\/)?(www\.)?([^\/]*))(.*)/i);
 		return s[1].toLowerCase() + s[5];
 	}
-	
-	var table = document.getElementById("wl");
+
+	const table = document.getElementById("wl");
 	populateTable(table, websites, ["Websites"]);
 	
 	flipSwitch("blackw", "whitew", wlist_type ? 0 : 1);
@@ -337,7 +341,7 @@ function createPWeb(){
 }
 
 function createPAbout(){
-	var page = document.getElementById("p3");
+	const page = document.getElementById("p3");
 	page.data = null;
 	
 	return page;
@@ -345,6 +349,7 @@ function createPAbout(){
 
 
 window.onload = function(){
+	let i;
 	pages = [
 		createPGeneral(),
 		createPRep(),
@@ -352,7 +357,7 @@ window.onload = function(){
 		createPAbout(),
 	];
 		
-	for(var i = 0; i < pages.length; i++){
+	for(i = 0; i < pages.length; i++){
 		pages[i].tab = document.getElementById("t" + i);
 		pages[i].help = document.getElementById("h" + i);
 		pages[i].tab.ident = i;
@@ -368,8 +373,8 @@ window.onload = function(){
 			pages.last_page = this.ident;
 		}
 	}
-	
-	var pnum = 0;
+
+	let pnum = 0;
 	if(i = location.href.search(/#/)){
 		pnum = parseInt(location.href.substr(i + 1));
 		pnum = isNaN(pnum) ? 0 : pnum;
@@ -384,10 +389,11 @@ window.onload = function(){
 }
 
 function saveData(){
-	// Remove empty searches
-	var rep = replace.slice(0);
-	for(var i = rep.length - 1; i >= 0; i--){
-		if(rep[i][0] == ""){
+	let i;
+// Remove empty searches
+	const rep = replace.slice(0);
+	for(i = rep.length - 1; i >= 0; i--){
+		if(rep[i][0] === ""){
 			rep.splice(i, 1);
 		}
 	}
@@ -399,9 +405,9 @@ function saveData(){
 	
 	
 	// Remove empty websites
-	var web = websites.slice(0);
-	for(var i = web.length - 1; i >= 0; i--){
-		if(web[i][0] == ""){
+	const web = websites.slice(0);
+	for(i = web.length - 1; i >= 0; i--){
+		if(web[i][0] === ""){
 			web.splice(i, 1);
 		}
 	}

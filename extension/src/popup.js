@@ -24,11 +24,11 @@
 
 window.onload = function(){
 
-	var etoggle = document.getElementById("etoggle");
-	var eseparator = document.getElementById("eseparator");
-	var ptoggle = document.getElementById("ptoggle");
-	var dtoggle = document.getElementById("dtoggle");
-	var error = document.getElementById("perror");
+	const etoggle = document.getElementById("etoggle");
+	const eseparator = document.getElementById("eseparator");
+	const ptoggle = document.getElementById("ptoggle");
+	const dtoggle = document.getElementById("dtoggle");
+	const error = document.getElementById("perror");
 
 	if(chrome.extension.getViews({type:'tab'}).length > 0){
 		etoggle.style.display = "none";
@@ -39,7 +39,7 @@ window.onload = function(){
 	} else{
 		error.style.display = "none";
 
-		var echeckbox = document.getElementById("echeck");
+		const echeckbox = document.getElementById("echeck");
 
 		echeckbox.onchange = function(){
 			ponify_enabled = this.checked;
@@ -59,45 +59,45 @@ window.onload = function(){
 			return;
 		}
 
-		var dcheckbox = document.getElementById("dcheck");
-		var pcheckbox = document.getElementById("pcheck");
+		const dcheckbox = document.getElementById("dcheck");
+		const pcheckbox = document.getElementById("pcheck");
 
 		chrome.tabs.query( { active: true }, tabs => tabs.forEach( tab => {
 
-			var r = /([^\/]+:\/\/)?(www\.)?(([^\/]*)[^\?#]*)/;
-			var a = r.exec(tab.url);
+			const r = /([^\/]+:\/\/)?(www\.)?(([^\/]*)[^\?#]*)/;
+			const a = r.exec(tab.url);
 
-			if(a[1] == "http://" || a[1] == "https://"){
+			if(a[1] === "http://" || a[1] === "https://"){
 
-				var domain;
-				var page;
+				let domain;
+				let page;
 
-				for(var i = 0; i < websites.length; i++){
-					var b = r.exec(websites[i][0]);
+				for(let i = 0; i < websites.length; i++){
+					const b = r.exec(websites[i][0]);
 
-					if(b[3].substr(0, a[3].length) == a[3]){
+					if(b[3].substr(0, a[3].length) === a[3]){
 						page = websites[i][0];
 					}
 
-					if(a[4] == b[3]){
+					if(a[4] === b[3]){
 						domain = websites[i][0];
 					}
 				}
 
-				dcheckbox.checked = (domain == undefined) != wlist_type;
+				dcheckbox.checked = (domain === undefined) !== wlist_type;
 
-				if(domain == undefined){
+				if(domain === undefined){
 					domain = a[4];
 				}
 
-				if(dcheckbox.checked == wlist_type){
+				if(dcheckbox.checked === wlist_type){
 					pcheckbox.disabled = true;
 					ptoggle.setAttribute("class", "disabled");
 				}
 
-				pcheckbox.checked = (page == undefined) != wlist_type;
+				pcheckbox.checked = (page === undefined) !== wlist_type;
 
-				if(page == undefined){
+				if(page === undefined){
 					page = a[3];
 				}
 
@@ -107,7 +107,7 @@ window.onload = function(){
 					checkChange(this, page);
 				};
 				dcheckbox.onchange = function(){
-					if(pcheckbox.checked != wlist_type){
+					if(pcheckbox.checked !== wlist_type){
 						chrome.tabs.update(tab.id, {url: tab.url});
 					}
 					checkChange(this, domain);
@@ -138,9 +138,9 @@ window.onload = function(){
 }
 
 function checkChange(cb, address){
-	if(cb.checked != wlist_type){
-		for(var i = 0; i < websites.length; i++){
-			if(address == websites[i]){
+	if(cb.checked !== wlist_type){
+		for(let i = 0; i < websites.length; i++){
+			if(address === websites[i]){
 				websites.splice(i, 1);
 			}
 		}

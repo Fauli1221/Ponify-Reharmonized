@@ -22,12 +22,12 @@
 */
 
 
-var replace;
-var websites;
-var wlist_type;
-var pseudo_threading;
-var ponify_enabled;
-var highlight;
+let replace;
+let websites;
+let wlist_type;
+let pseudo_threading;
+let ponify_enabled;
+let highlight;
 
 function initVars(){
 	if(!localStorage["wlist_type"]){

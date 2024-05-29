@@ -42,20 +42,10 @@ body{
 	width: 100%;
 	border-top: 1px SOLID #C5C5C5;
 	border-bottom: 1px SOLID #C5C5C5;
-	
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #ebebeb),
-		color-stop(1, #FFFFFF)
-	);
-	background-image: -moz-linear-gradient(
-		center bottom,
-		#ebebeb 0%,
-		#FFFFFF 100%
-	);
 
+
+	background: #EBEBEB;
+	background: linear-gradient(0deg, #EBEBEB, #FFFFFF);
 }
 #tabs{
 	list-style-type: none;
@@ -77,32 +67,12 @@ body{
 	vertical-align: middle;
 }
 #tabs li:hover{
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #FFFFFF),
-		color-stop(1, #FCFCFC)
-	);
-	background-image: -moz-linear-gradient(
-		center bottom,
-		#FFFFFF 0%,
-		#FCFCFC 100%
-	);
+	background: #FFFFFF;
+	background: linear-gradient(0deg, #FFFFFF, #FCFCFC);
 }		
 #tabs .clicked{
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #FFFFFF),
-		color-stop(1, #FCFCFC)
-	);
-	background-image: -moz-linear-gradient(
-		center bottom,
-		#FFFFFF 0%,
-		#FCFCFC 100%
-	);
+	background: #FFFFFF;
+	background: linear-gradient(0deg, #FFFFFF, #FCFCFC);
 	position: relative;
 }
 #tabs .clicked:before {
