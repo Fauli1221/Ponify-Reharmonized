@@ -17,8 +17,7 @@
             ],
             "all_frames": true,
             "matches": [
-                "http://*/*",
-                "https://*/*"
+                "<all_urls>"
             ]
         }
     ],
@@ -46,7 +45,6 @@
         "activeTab"
     ],
     "host_permissions": [
-        "http://*/*",
-        "https://*/*"
+        "<all_urls>"
     ]
 }
