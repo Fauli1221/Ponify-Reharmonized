@@ -22,7 +22,7 @@
             ]
         }
     ],
-    "browser_action": {
+    "action": {
         "default_icon": "img/rh16.png",
         "default_popup": "popup.htm",
         "default_title": "Ponify"
@@ -37,8 +37,7 @@
         "scripts": [
             "src/init.js",
             "src/background.js"
-        ],
-        "persistent": false
+        ]
     },
     "version": "19.1.14",
     "description": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton.",

@@ -77,9 +77,9 @@ function updateIcon(tab){
 	}
 
 	if (ponify) {
-		chrome.browserAction.setIcon({path:"img/rh16.png", tabId: tab.id});
+		chrome.action.setIcon({path:"img/rh16.png", tabId: tab.id});
 	} else {
-		chrome.browserAction.setIcon({path:"img/rh16gray.png", tabId: tab.id});
+		chrome.action.setIcon({path:"img/rh16gray.png", tabId: tab.id});
 	}
 }
 
