@@ -26,17 +26,17 @@ let pdata;
 let pages;
 
 function setEnabled(conf, enable, button, array){
-	var conf = document.getElementById(conf);
-	var enable = document.getElementById(enable);
-	
+	const local_conf = document.getElementById(conf);
+	const local_enable = document.getElementById(enable);
+
 	if(array.length === 0){
-		conf.style.display = "none";
+		local_conf.style.display = "none";
 		document.getElementById(button).onclick = function(){
-			enable.style.display = "none";
-			conf.style.display = "block";			
+			local_enable.style.display = "none";
+			local_conf.style.display = "block";
 		}
 	} else{
-		enable.style.display = "none";
+		local_enable.style.display = "none";
 	}
 }
 
