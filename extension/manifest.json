@@ -38,7 +38,7 @@
             "src/background.js"
         ]
     },
-    "version": "19.1.14",
+    "version": "19.1.15",
     "description": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton.",
     "permissions": [
         "tabs",
