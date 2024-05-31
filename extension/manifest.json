@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Ponify Reharmonized",
 	"description": "Ponify Reharmonized is a utility replacing all human words with ponified alternatives. Thank you, Ben Ashton.",
-	"version": "19.1.15",
+	"version": "19.1.16",
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "the@birb.horse",
