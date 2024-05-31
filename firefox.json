@@ -1,11 +1,11 @@
 {
-  "summary": {
-    "en-US": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton."
-  },
-  "categories": [
-    "appearance"
-  ],
-  "version": {
-    "license": "GPL-3.0-or-later"
-  }
+	"summary": {
+		"en-US": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton."
+	},
+	"categories": [
+		"appearance"
+	],
+	"version": {
+		"license": "GPL-3.0-or-later"
+	}
 }

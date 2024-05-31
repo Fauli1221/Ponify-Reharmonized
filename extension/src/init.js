@@ -21,6 +21,29 @@
 	
 */
 
+// Quick and dirty Chromium and WebExtension compat functions
+let weOpenTab, weTestPerm;
+if (self.browser) {
+	// WebExtension API
+	weOpenTab = (url) => {
+		return browser.tabs.create({url});
+	};
+	weTestPerm = (perms) => {
+		return browser.permissions.contains(perms);
+	};
+} else {
+	// Chromium extension API
+	weOpenTab = (url) => {
+		return new Promise((p, r) => {
+			chrome.tabs.create({url}, p);
+		});
+	};
+	weTestPerm = (perms) => {
+		return new Promise((p, r) => {
+			chrome.permissions.contains(perms, p);
+		});
+	};
+};
 
 let replace;
 let websites;
@@ -149,3 +172,15 @@ function initVars(){
 }
 
 initVars();
+
+(async () => {
+// Wrestling with JS interpreters
+//console.debug(`DEER`);
+let testCrit = await weTestPerm({origins: ["<all_urls>"]});
+if (testCrit) {
+	// The extension does not have host permissions
+	//console.debug(`VERY`);
+	await weOpenTab(chrome.runtime.getURL("consent.htm"));
+};
+//console.debug(`HORNY`);
+})();
