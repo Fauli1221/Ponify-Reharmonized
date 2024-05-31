@@ -1,50 +1,52 @@
 {
+	"manifest_version": 3,
+	"name": "Ponify Reharmonized",
+	"description": "Ponify Reharmonized is a utility replacing all human words with ponified alternatives. Thank you, Ben Ashton.",
+	"version": "19.1.15",
 	"browser_specific_settings": {
 		"gecko": {
-		  "id": "the@birb.horse",
-		  "strict_min_version": "115.0"
+			"id": "the@birb.horse",
+			"strict_min_version": "115.0"
+		},
+		"gecko_android": {
+			"strict_min_version": "115.0"
 		}
 	},
-    "content_scripts": [
-        {
-            "exclude_globs": [],
-            "include_globs": [
-                "*"
-            ],
-            "run_at": "document_end",
-            "js": [
-                "src/replace.js"
-            ],
-            "all_frames": true,
-            "matches": [
-                "<all_urls>"
-            ]
-        }
-    ],
-    "action": {
-        "default_icon": "img/rh16.png",
-        "default_popup": "popup.htm",
-        "default_title": "Ponify"
-    },
-    "icons": {
-        "16": "img/rh16.png",
-        "48": "img/rh48.png"
-    },
-    "manifest_version": 3,
-    "name": "Ponify Reharmonized",
-    "background": {
-        "scripts": [
-            "src/init.js",
-            "src/background.js"
-        ]
-    },
-    "version": "19.1.15",
-    "description": "Ponify Reharmonized is a tool for replacing all human words with a ponified variations. Thank you, Ben Ashton.",
-    "permissions": [
-        "tabs",
-        "activeTab"
-    ],
-    "host_permissions": [
-        "<all_urls>"
-    ]
+	"content_scripts": [
+		{
+			"include_globs": [
+				"*"
+			],
+			"run_at": "document_end",
+			"js": [
+				"src/replace.js"
+			],
+			"all_frames": true,
+			"matches": [
+				"<all_urls>"
+			]
+		}
+	],
+	"action": {
+		"default_icon": "img/rh16.png",
+		"default_popup": "popup.htm",
+		"default_title": "Ponify"
+	},
+	"icons": {
+		"16": "img/rh16.png",
+		"48": "img/rh48.png"
+	},
+	"background": {
+		"scripts": [
+			"src/init.js",
+			"src/background.js"
+		]
+	},
+	"permissions": [
+		"tabs",
+		"activeTab"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	]
 }
