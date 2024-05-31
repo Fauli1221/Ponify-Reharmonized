@@ -177,7 +177,7 @@ initVars();
 // Wrestling with JS interpreters
 //console.debug(`DEER`);
 let testCrit = await weTestPerm({origins: ["<all_urls>"]});
-if (testCrit) {
+if (!testCrit) {
 	// The extension does not have host permissions
 	//console.debug(`VERY`);
 	await weOpenTab(chrome.runtime.getURL("consent.htm"));
